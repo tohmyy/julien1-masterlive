@@ -1,0 +1,14 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+
+
+<form action="{% url 'update_customer' customer.id%}" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input class="btn btn-sm btn-info" type = "submit" name="Submit">
+</form>
+
+
+{% endblock %}
