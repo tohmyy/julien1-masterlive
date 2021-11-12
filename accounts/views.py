@@ -80,7 +80,7 @@ def home(request):
 
     context = {'orders': orders, 'customersA': customers, 'totalorders':totalorders, 'pending':pending, 'delivered':delivered}
 
-    return render(request,'templates/accounts\dashboard.html', context)
+    return render(request,'templates/accounts/dashboard.html', context)
     '''rendering(returning) data created in form of dictionary list(context) that 
         that can be looped through'''
 
