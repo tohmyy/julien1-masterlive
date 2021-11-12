@@ -1,4 +1,4 @@
-{%extends 'accounts\main.html'%}
+{%extends 'templates/accounts/main.html'%}
 {%block content%}
 {%load static%}
 <style>
@@ -14,7 +14,7 @@
 
 <span id="user-profile">User Profile</span>
 <span id='customer-name'>{{currentUser}}</span>
-{%include 'accounts/status.html'%}
+{%include 'templates/accounts/status.html'%}
 
 
 <br><br><br>
