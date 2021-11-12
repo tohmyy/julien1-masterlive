@@ -40,7 +40,7 @@ def registerPage(request):
 
             return redirect('login')
     context = {'form':form}
-    return render(request, 'accounts/register.html', context)
+    return render(request, 'templates/accounts/register.html', context)
 
 @unauthenticated_user
 
@@ -59,7 +59,7 @@ def loginPage(request):
 
 
     context = {}
-    return render(request,'accounts/login.html', context)
+    return render(request,'templates/accounts/login.html', context)
 
 def logoutUser(request):
     logout(request)
@@ -80,7 +80,7 @@ def home(request):
 
     context = {'orders': orders, 'customersA': customers, 'totalorders':totalorders, 'pending':pending, 'delivered':delivered}
 
-    return render(request,'accounts\dashboard.html', context)
+    return render(request,'templates/accounts\dashboard.html', context)
     '''rendering(returning) data created in form of dictionary list(context) that 
         that can be looped through'''
 
@@ -89,7 +89,7 @@ def home(request):
 def products(request):
     products = Product.objects.all()
 
-    return render(request, 'accounts\products.html', {'products':products})
+    return render(request, 'templates/accounts/products.html', {'products':products})
 
 
 @login_required(login_url='login')#redirect to login page
@@ -104,7 +104,7 @@ def customer(request, pk_test):
     orders = myFilter.qs
 
     context = {'customer':customer, 'orders': orders, 'totalorders': totalorders, 'myFilter': myFilter}
-    return render(request, 'accounts\customer.html', context)
+    return render(request, 'templates/accounts/customer.html', context)
 
 
 @login_required(login_url='login')#redirect to login page
@@ -119,7 +119,7 @@ def createCustomer(request):
             return redirect("/")
 
     context = {'form': form}
-    return render(request, 'accounts/create_customer.html', context)
+    return render(request, 'templates/accounts/create_customer.html', context)
 
 
 @login_required(login_url='login')#redirect to login page
@@ -135,7 +135,7 @@ def updateCustomer(request, pk):
             return redirect("/")
 
     context = {'form': form, 'customer': customer}
-    return render(request, 'accounts/update_customer.html', context)
+    return render(request, 'templates/accounts/update_customer.html', context)
 
 @login_required(login_url='login')#redirect to login page
 @allowed_users(allowed_roles=['admin'])
@@ -147,7 +147,7 @@ def deleteCustomer(request, pk):
             return redirect("/")
 
     context = {'customer': customer}
-    return render(request, 'accounts/delete_customer.html', context)
+    return render(request, 'templates/accounts/delete_customer.html', context)
 
 
 @login_required(login_url='login')#redirect to login page
@@ -163,7 +163,7 @@ def createOrder(request):
             return redirect("/")
 
     context = {'form':form}
-    return render(request, 'accounts\order_form.html', context)
+    return render(request, 'templates/accounts/order_form.html', context)
 
 
 @login_required(login_url='login')#redirect to login page
@@ -184,7 +184,7 @@ def placeNewOrder(request, pk):
             return redirect("/")
 
     context = {'formset':formset, 'customer':customer}
-    return render(request, 'accounts\order_form.html', context)
+    return render(request, 'templates\accounts\order_form.html', context)
 
 #pass primary key "pk" when you want to perform action on a specific item
 @login_required(login_url='login')#redirect to login page
@@ -205,7 +205,7 @@ def updateOrder(request, pk):
             return redirect("/")
 
     context = {'form': form}
-    return render(request, 'accounts/order_form.html', context)
+    return render(request, 'templates/accounts/order_form.html', context)
 
 @login_required(login_url='login')#redirect to login page
 @allowed_users(allowed_roles=['admin'])
@@ -217,7 +217,7 @@ def deleteOrder(request, pk):
         return redirect("/")
 
     context = {'item': order}
-    return render(request, 'accounts\delete.html', context)
+    return render(request, 'templates/accounts/delete.html', context)
 
 
 @login_required(login_url='login')#redirect to login page
@@ -233,7 +233,7 @@ def userPage(request):
 
     context = {'currentUser':currentUser, 'orders':orders, 'totalorders':totalorders, 'delivered':delivered, 'pending':pending}
 
-    return render(request, 'accounts/user.html', context)
+    return render(request, 'templates/accounts/user.html', context)
 
 
 
@@ -246,7 +246,7 @@ def profileSettings(request):
 
 
     context = {'customer': customer, 'forms':form}
-    return render(request, 'accounts/profile_settings.html', context)
+    return render(request, 'templates/accounts/profile_settings.html', context)
 
 def updateProfile(request):
     customer = request.user.customer
@@ -260,4 +260,4 @@ def updateProfile(request):
             form.save()
 
     context = {'customer': customer, 'forms':form}
-    return render(request, 'accounts/profile_settings.html', context)
+    return render(request, 'templates/accounts/profile_settings.html', context)
