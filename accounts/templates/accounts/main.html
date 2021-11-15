@@ -8,7 +8,20 @@
     <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
 
 <style>    
-    footer {
+  #page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem; 
   text-align: right;
   padding: 3px;
 }
@@ -24,11 +37,16 @@
 
 {%endblock%}
 <hr>
-<footer>
+<div id="page-container">
+<div id="content-wrap">
+ <!-- all other page content -->
+</div>
+<footer id="footer">
 <p>Our Footer</p>
 <a href="/admin">Admin Page</a>
 <span>   <a id="hello-msg" href="{% url 'logout' %} " class="btn btn-sm btn-danger">Logout</a></span>
 </footer>
+</div>
 </body>
 
  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
