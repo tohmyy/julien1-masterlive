@@ -171,6 +171,7 @@ def createOrder(request):
 def placeNewOrder(request, pk):
     OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=4)
     customer = Customer.objects.get(id=pk)
+    user = request.user.customer.objects.get(id=pk)
 
     formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
     #form = OrderForm(initial={'customer':customer})
@@ -183,7 +184,7 @@ def placeNewOrder(request, pk):
             formset.save()
             return redirect("/")
 
-    context = {'formset':formset, 'customer':customer}
+    context = {'formset':formset, 'customer':customer, 'user':user}
     return render(request, 'templates/accounts/order_form.html', context)
 
 #pass primary key "pk" when you want to perform action on a specific item
