@@ -151,7 +151,7 @@ def deleteCustomer(request, pk):
 
 
 @login_required(login_url='login')#redirect to login page
-@allowed_users(allowed_roles=['admin'])
+@allowed_users(allowed_roles=['admin', 'customer'])
 def createOrder(request):
     form = OrderForm()
     #print('Printing POST:', request.POST)
@@ -167,7 +167,7 @@ def createOrder(request):
 
 
 @login_required(login_url='login')#redirect to login page
-@allowed_users(allowed_roles=['admin'])
+@allowed_users(allowed_roles=['admin', 'customer'])
 def placeNewOrder(request, pk):
     OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=4)
     customer = Customer.objects.get(id=pk)
@@ -184,7 +184,7 @@ def placeNewOrder(request, pk):
             return redirect("/")
 
     context = {'formset':formset, 'customer':customer}
-    return render(request, 'templates\accounts\order_form.html', context)
+    return render(request, 'templates/accounts/order_form.html', context)
 
 #pass primary key "pk" when you want to perform action on a specific item
 @login_required(login_url='login')#redirect to login page
