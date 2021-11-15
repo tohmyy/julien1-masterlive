@@ -174,17 +174,19 @@ def placeNewOrder(request, pk):
     user = request.user.customer.objects.get(id=pk)
 
     formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
+    formsetss = OrderFormSet(queryset=Order.objects.none(), instance=user)
     #form = OrderForm(initial={'customer':customer})
 
     if request.method == 'POST':
         #form = OrderForm(request.POST)
         formset = OrderFormSet(request.POST, instance=customer)
+        formsetss = OrderFormSet(request.POST, instance=user)
 
         if formset.is_valid():
             formset.save()
             return redirect("/")
 
-    context = {'formset':formset, 'customer':customer, 'user':user}
+    context = {'formset':formset, 'customer':customer, 'user':user, 'formsetss':formsetss}
     return render(request, 'templates/accounts/order_form.html', context)
 
 #pass primary key "pk" when you want to perform action on a specific item
