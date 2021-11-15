@@ -45,12 +45,15 @@
     </ul>
   </div>
 
+ {% if request.user.is_staff %}
+
+ {% else %}
     <span class="hello-msg"> Hello, {{request.user}}</span>
 
   <a href="{% url 'profile' %}">
     <img alt="error" src="{{ request.user.customer.profilePic.url }}"
          width=40" height="40" id="profile-pic">
   </a>
-
+{% endif %}
 
   </nav>
