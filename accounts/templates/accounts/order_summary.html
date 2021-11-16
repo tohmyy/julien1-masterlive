@@ -19,14 +19,21 @@
 
 <!-- rendering the data(created) into html files for display-->
              
+            {% total = 0 %}
                 
             {% for i in orders %}
                  <tr><!-- new table row-->
             <td>{{i.product.name}}</td>
             <td>{{i.product.category}}</td><!-- new table column-->
             <td>{{i.product.price}}</td>
+            {% total=total+ i.product.price%}
                 </tr>
             {% endfor %}
+                <tr>
+                    <td></td>
+                    <td>                              Total</td>
+                    <td>{% total %}</td
+                </tr>
 
             </table>
             </div>
