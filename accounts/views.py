@@ -231,11 +231,12 @@ def orderSummary(request):
     orders = request.user.customer.order_set.all()
     
     total = 0
+    empty = '                                   '
     for i in orders:
         i.product.price
         total = (total+ (i.product.price))
     
-    return render(request, 'templates/accounts/order_summary.html', {'orders':orders, 'customer_id':customer_id, 'total':total})
+    return render(request, 'templates/accounts/order_summary.html', {'orders':orders, 'customer_id':customer_id, 'total':total, 'empty':empty})
     
 
 
