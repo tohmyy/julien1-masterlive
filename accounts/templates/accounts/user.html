@@ -41,7 +41,9 @@
                 <td> <a class="btn btn-sm btn-info" href="{% url 'update_order' i.id %}">Update</a> </td>
                 <td> <a class="btn btn-sm btn-danger" href="{%url 'delete_order' i.id %}">Delete</a> </td>
             </tr>
+            
             {% endfor %}
+            <a class="btn btn-sm btn-warning" href="{% url 'order_summary' i.id %}">Order Summary</a>
         </table>
     </div>
 </div>
