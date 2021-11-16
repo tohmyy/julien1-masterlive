@@ -224,6 +224,19 @@ def deleteOrder(request, pk):
 
 
 @login_required(login_url='login')#redirect to login page
+@allowed_users(allowed_roles=['admin', 'customer'])
+def orderSummary(request, pk):
+    customer = request.user.customer.objects.get(id=pk)
+
+    orders = Order.objects.get(id=pk)
+
+    
+    return render(request, 'templates/accounts/order_summary.html', {'orders':orders, 'customer':customer})
+    
+
+
+
+@login_required(login_url='login')#redirect to login page
 @allowed_users(allowed_roles=['customer'])
 def userPage(request):
     currentUser = request.user.customer.name
