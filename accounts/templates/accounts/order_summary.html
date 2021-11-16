@@ -18,14 +18,16 @@
         </tr>
 
 <!-- rendering the data(created) into html files for display-->
-              <tr><!-- new table row-->
+             
                 
-            {% for i in orders %}            
+            {% for i in orders %}
+                 <tr><!-- new table row-->
+            <td>{{i.product.name}}</td>
             <td>{{i.product.category}}</td><!-- new table column-->
             <td>{{i.product.price}}</td>
-        
+                </tr>
             {% endfor %}
-</tr>
+
             </table>
             </div>
         </div>
