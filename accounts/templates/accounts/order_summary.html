@@ -1,0 +1,35 @@
+{%extends 'templates/accounts/main.html'%}
+{%block content%}
+
+
+
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Products</h5>
+        </div>
+        <div class="card card-body">
+            <table class="table">
+        <tr>
+        <th>Product</th>
+        <th>Category</th>
+        <th>Price</th>
+        </tr>
+
+<!-- rendering the data(created) into html files for display-->
+              <tr><!-- new table row-->
+                <td>{{orders}}</td>
+            {% for i in orders %}            
+            <td>{{i.product.category}}</td><!-- new table column-->
+            <td>{{i.product.price}}</td>
+        
+            {% endfor %}
+</tr>
+            </table>
+            </div>
+        </div>
+</div>
+
+
+{%endblock%}
