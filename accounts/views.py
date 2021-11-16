@@ -228,7 +228,7 @@ def deleteOrder(request, pk):
 def orderSummary(request):
     customer_id = request.user.customer.id
 
-    orders = Order.objects.get(id=customer_id)
+    orders = request.user.customer.order_set.all()
 
     
     return render(request, 'templates/accounts/order_summary.html', {'orders':orders, 'customer_id':customer_id})
