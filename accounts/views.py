@@ -225,13 +225,13 @@ def deleteOrder(request, pk):
 
 @login_required(login_url='login')#redirect to login page
 @allowed_users(allowed_roles=['admin', 'customer'])
-def orderSummary(request, pk):
-    customer = request.user.customer.objects.get(id=pk)
+def orderSummary(request):
+    customer_id = request.user.customer.id
 
-    orders = Order.objects.get(id=pk)
+    orders = Order.objects.get(id=customer_id)
 
     
-    return render(request, 'templates/accounts/order_summary.html', {'orders':orders, 'customer':customer})
+    return render(request, 'templates/accounts/order_summary.html', {'orders':orders, 'customer_id':customer_id})
     
 
 
