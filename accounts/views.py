@@ -227,11 +227,13 @@ def deleteOrder(request, pk):
 @allowed_users(allowed_roles=['admin', 'customer'])
 def orderSummary(request):
     customer_id = request.user.customer.id
-    
-    total = 0
 
     orders = request.user.customer.order_set.all()
-
+    
+    total = 0
+    for i in orders:
+        i.product.price
+        total = (total+ (i.product.price))
     
     return render(request, 'templates/accounts/order_summary.html', {'orders':orders, 'customer_id':customer_id, 'total':total})
     
