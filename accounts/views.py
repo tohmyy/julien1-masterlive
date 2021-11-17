@@ -164,7 +164,7 @@ def createOrder(request):
 
     context = {'form':form}
     return render(request, 'templates/accounts/order_form.html', context)
-    
+
 
 '''
 @login_required(login_url='login')#redirect to login page
@@ -194,7 +194,7 @@ def placeNewOrder(request, pk):
 
 @login_required(login_url='login')#redirect to login page
 @allowed_users(allowed_roles=['admin', 'customer'])
-def placeNewOrder(request, pk):
+def placeNewOrder(request):
     OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=4)
     
     customer = Customer.objects.get(name=request.user.customer.name)
