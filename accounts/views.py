@@ -149,7 +149,7 @@ def deleteCustomer(request, pk):
     context = {'customer': customer}
     return render(request, 'templates/accounts/delete_customer.html', context)
 
-
+'''
 @login_required(login_url='login')#redirect to login page
 @allowed_users(allowed_roles=['admin', 'customer'])
 def createOrder(request):
@@ -164,6 +164,7 @@ def createOrder(request):
 
     context = {'form':form}
     return render(request, 'templates/accounts/order_form.html', context)
+    '''
 
 '''
 @login_required(login_url='login')#redirect to login page
