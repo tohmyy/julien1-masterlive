@@ -44,13 +44,13 @@
         <th>Update</th>
 <th>Remove</th>
 </tr>
-        {% for i in orders %}
+        {% for item in orders %}
         <tr>
-            <td>{{i.product.name}}</td>
-            <td>{{i.date_created}}</td>
-            <td>{{i.status}}</td>
-            <td> <a class="btn btn-sm btn-info" href="{% url 'update_order' i.id %}">Update</a> </td>
-            <td> <a class="btn btn-sm btn-danger" href="{%url 'delete_order' i.id %}">Delete</a> </td>
+            <td>{{item.product.name}}</td>
+            <td>{{item.date_created}}</td>
+            <td>{{item.status}}</td>
+            <td> <a class="btn btn-sm btn-info" href="{% url 'update_order' item.id %}">Update</a> </td>
+            <td> <a class="btn btn-sm btn-danger" href="{%url 'delete_order' item.id %}">Delete</a> </td>
         </tr>
         {% endfor %}
         </table>
