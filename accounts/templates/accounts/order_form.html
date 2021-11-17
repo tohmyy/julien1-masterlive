@@ -10,8 +10,8 @@
                 
                           
                 {% csrf_token %}
-                {{formsetss.management_form}}
-                {%for form in formsetss%}
+                {{formset.management_form}}
+                {%for form in formset%}
                     {{form}}
                 <hr>
                 {%endfor%}
