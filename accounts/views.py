@@ -191,7 +191,7 @@ def placeNewOrder(request, pk):
     return render(request, 'templates/accounts/order_form.html', context)
 '''
 
-
+'''
 @login_required(login_url='login')#redirect to login page
 @allowed_users(allowed_roles=['admin', 'customer'])
 def placeNewOrder(request, pk):
@@ -204,6 +204,29 @@ def placeNewOrder(request, pk):
 
     if request.method == 'POST':
         #form = OrderForm(request.POST)
+        formset = OrderFormSet(request.POST, instance=customer)
+
+        if formset.is_valid():
+            formset.save()
+            return redirect("/")
+
+    context = {'customer':customer, 'formset':formset}
+    return render(request, 'templates/accounts/order_form.html', context)
+'''
+
+
+
+@login_required(login_url='login')#redirect to login page
+@allowed_users(allowed_roles=['admin', 'customer'])
+def placeNewOrder(request):
+    OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=4)
+    
+    customer = Customer.objects.get(request.user.customer.name)
+
+    formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
+    
+
+    if request.method == 'POST':
         formset = OrderFormSet(request.POST, instance=customer)
 
         if formset.is_valid():
