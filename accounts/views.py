@@ -199,18 +199,18 @@ def placeNewOrder(request, pk):
     
     customer = Customer.objects.get(id=pk)
 
-    formsetss = OrderFormSet(queryset=Order.objects.none(), instance=customer)
+    formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
     #form = OrderForm(initial={'customer':customer})
 
     if request.method == 'POST':
         #form = OrderForm(request.POST)
         formsetss = OrderFormSet(request.POST, instance=customer)
 
-        if formsetss.is_valid():
-            formsetss.save()
+        if formset.is_valid():
+            formset.save()
             return redirect("/")
 
-    context = {'customer':customer, 'formsetss':formsetss}
+    context = {'customer':customer, 'formset':formset}
     return render(request, 'templates/accounts/order_form.html', context)
 
 
