@@ -18,13 +18,21 @@
         </tr>
 
 <!-- rendering the data(created) into html files for display-->
-            {% for i in products %}
-        <tr><!-- new table row-->
-            <td>{{i.name}}</td><!-- new table column-->
-            <td>{{i.category}}</td>
-            <td>{{i.price}}</td>
-        </tr>
+             
+            
+                
+            {% for i in orders %}
+                 <tr><!-- new table row-->
+            <td>{{i.product.name}}</td>
+            <td>{{i.product.category}}</td><!-- new table column-->
+            <td>{{i.product.price}}</td>
+                </tr>
             {% endfor %}
+                <tr>
+                    <td></td>
+                    <td>{{empty}}            Total</td> <br>
+                    <td>{{total}}</td
+                </tr>
 
             </table>
             </div>

@@ -1,4 +1,4 @@
-{%extends 'accounts\main.html'%}
+{%extends 'templates/accounts/main.html'%}
 {%block content%}
 {%load static%}
 <style>
@@ -14,7 +14,7 @@
 
 <span id="user-profile">User Profile</span>
 <span id='customer-name'>{{currentUser}}</span>
-{%include 'accounts/status.html'%}
+{%include 'templates/accounts/status.html'%}
 
 
 <br><br><br>
@@ -24,7 +24,7 @@
     <h5>LAST 5 ORDERS</h5>
     <hr>
     <div class="card card-body">
-        <a class="btn btn-primary  btn-sm btn-block" href="{% url 'create_order' %}">Create Order</a>
+        <a class="btn btn-primary  btn-sm btn-block" href="{% url 'place_new_order' user.id %}">Place Order</a>
         <table class="table table-sm">
             <tr>
                 <th>Product</th>
@@ -41,7 +41,9 @@
                 <td> <a class="btn btn-sm btn-info" href="{% url 'update_order' i.id %}">Update</a> </td>
                 <td> <a class="btn btn-sm btn-danger" href="{%url 'delete_order' i.id %}">Delete</a> </td>
             </tr>
+            
             {% endfor %}
+            <a class="btn btn-sm btn-warning" href="{% url 'order_summary' %}">Order Summary</a>
         </table>
     </div>
 </div>
