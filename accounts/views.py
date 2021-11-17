@@ -165,7 +165,7 @@ def createOrder(request):
     context = {'form':form}
     return render(request, 'templates/accounts/order_form.html', context)
 
-
+'''
 @login_required(login_url='login')#redirect to login page
 @allowed_users(allowed_roles=['admin', 'customer'])
 def placeNewOrder(request, pk):
@@ -188,6 +188,32 @@ def placeNewOrder(request, pk):
 
     context = {'formset':formset, 'customer':customer, 'user':user, 'formsetss':formsetss}
     return render(request, 'templates/accounts/order_form.html', context)
+'''
+
+
+@login_required(login_url='login')#redirect to login page
+@allowed_users(allowed_roles=['admin', 'customer'])
+def placeNewOrder(request, pk):
+    OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=4)
+    
+    user = request.user.customer.objects.get(id=pk)
+
+    formsetss = OrderFormSet(queryset=Order.objects.none(), instance=user)
+    #form = OrderForm(initial={'customer':customer})
+
+    if request.method == 'POST':
+        #form = OrderForm(request.POST)
+        formsetss = OrderFormSet(request.POST, instance=user)
+
+        if formsetss.is_valid():
+            formsetss.save()
+            return redirect("/")
+
+    context = {'customer':customer, 'user':user, 'formsetss':formsetss}
+    return render(request, 'templates/accounts/order_form.html', context)
+
+
+
 
 #pass primary key "pk" when you want to perform action on a specific item
 @login_required(login_url='login')#redirect to login page
