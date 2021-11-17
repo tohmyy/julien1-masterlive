@@ -7,9 +7,8 @@
     margin-right:20px;
   }
     #settings-bar{
-    font-size:18px;
     color:#fff;
-    margin-right:50px;
+    margin-right:2px;
   }
   #profile-pic{
     width:40px;
@@ -32,18 +31,18 @@
     <ul class="navbar-nav ml-auto">
       {% if request.user.is_staff %}
       <li class="nav-item active">
-      <a class="nav-link" href=" {% url 'home' %}">Dashboard</a>
+      <a class="nav-link" id="settings-bar" href=" {% url 'home' %}">Dashboard</a>
       </li>
       <li class="nav-item">
-      <a class="nav-link" href="{% url 'products' %}">Products</a>
+      <a class="nav-link" id="settings-bar" href="{% url 'products' %}">Products</a>
       </li>
           
       <li class="nav-item">
-      <a class="nav-link" href=" ">About</a>
+      <a class="nav-link" id="settings-bar" href=" ">About</a>
       </li>
            
        <li class="nav-item">
-      <a class="nav-link" href=" ">Contact Us</a>
+      <a class="nav-link" id="settings-bar" href=" ">Contact Us</a>
       </li>                                          
                                                      
            <li class="nav-item">
@@ -56,11 +55,11 @@
       </li>   
                                                                       
       <li class="nav-item">
-      <a class="nav-link" href=" ">About</a>
+      <a class="nav-link" id ="settings-bar" href=" ">About</a>
       </li>
            
        <li class="nav-item">
-      <a class="nav-link" href=" ">Contact Us</a>
+      <a class="nav-link" id="#settings-bar" href=" ">Contact Us</a>
       </li> 
       
       <li class="nav-item">
