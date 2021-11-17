@@ -197,7 +197,7 @@ def placeNewOrder(request, pk):
 def placeNewOrder(request, pk):
     OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=4)
     
-    customer = Customer.objects.get(name=request.user.customer.name)
+    customer = Customer.objects.get(id=pk)
 
     formsetss = OrderFormSet(queryset=Order.objects.none(), instance=customer)
     #form = OrderForm(initial={'customer':customer})
