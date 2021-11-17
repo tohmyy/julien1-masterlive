@@ -9,7 +9,7 @@
     #settings-bar{
     font-size:18px;
     color:#fff;
-    margin-right:50px;
+    margin-right:0px;
   }
   #profile-pic{
     width:40px;
@@ -37,6 +37,17 @@
       <li class="nav-item">
       <a class="nav-link" href="{% url 'products' %}">Products</a>
       </li>
+           <li class="nav-item">
+      <a class="nav-link" href=" ">About</a>
+      </li>
+           
+           <li class="nav-item">
+      <a class="nav-link" href=" ">Contact Us</a>
+      </li>
+                                                     
+      <li class="nav-item">
+        <a class="nav-link" id="settings-bar" href=" {% url 'logout' %}">Logout</a>
+      </li>
       {% else %}
                                                      
       <li class="nav-item">
@@ -45,6 +56,18 @@
                                                      
       <li class="nav-item">
         <a class="nav-link" id="settings-bar" href=" {% url 'profile' %}">Settings</a>
+      </li>
+                                                                         
+            <li class="nav-item">
+      <a class="nav-link" href=" ">About</a>
+      </li>
+           
+           <li class="nav-item">
+      <a class="nav-link" href=" ">Contact Us</a>
+      </li>
+                                                                         
+        <li class="nav-item">
+        <a class="nav-link" id="settings-bar" href=" {% url 'logout' %}">Logout</a>
       </li>
       {% endif %}
     </ul>
