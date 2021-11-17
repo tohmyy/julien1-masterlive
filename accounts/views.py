@@ -193,23 +193,23 @@ def placeNewOrder(request, pk):
 
 @login_required(login_url='login')#redirect to login page
 @allowed_users(allowed_roles=['admin', 'customer'])
-def placeNewOrder(request, pk):
+def placeNewOrder(request):
     OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=4)
     
-    user = request.user.customer.objects.get(id=pk)
+    customer = Customer.objects.get(request.user)
 
-    formsetss = OrderFormSet(queryset=Order.objects.none(), instance=user)
+    formsetss = OrderFormSet(queryset=Order.objects.none(), instance=customer)
     #form = OrderForm(initial={'customer':customer})
 
     if request.method == 'POST':
         #form = OrderForm(request.POST)
-        formsetss = OrderFormSet(request.POST, instance=user)
+        formsetss = OrderFormSet(request.POST, instance=customer)
 
         if formsetss.is_valid():
             formsetss.save()
             return redirect("/")
 
-    context = {'customer':customer, 'user':user, 'formsetss':formsetss}
+    context = {'customer':customer, 'formsetss':formsetss}
     return render(request, 'templates/accounts/order_form.html', context)
 
 
