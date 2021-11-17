@@ -218,7 +218,7 @@ def placeNewOrder(request, pk):
 
 @login_required(login_url='login')#redirect to login page
 @allowed_users(allowed_roles=['admin', 'customer'])
-def placeNewOrder(request):
+def userPlaceOrder(request):
     OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=4)
     
     customer = Customer.objects.get(id=request.user.customer.id)
