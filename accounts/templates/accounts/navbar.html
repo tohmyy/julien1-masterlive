@@ -37,15 +37,41 @@
       <li class="nav-item">
       <a class="nav-link" href="{% url 'products' %}">Products</a>
       </li>
+          
+      <li class="nav-item">
+      <a class="nav-link" href=" ">About</a>
+      </li>
+           
+       <li class="nav-item">
+      <a class="nav-link" href=" ">Contact Us</a>
+      </li>                                          
+                                                     
+           <li class="nav-item">
+        <a class="nav-link" id="settings-bar" href=" {% url 'logout' %}">Logout</a>
+      </li>
       {% else %}
                                                      
       <li class="nav-item">
         <a class="nav-link" id="settings-bar" href=" {% url 'home' %}">Home</a>
-      </li>                                               
-                                                     
+      </li>   
+                                                                      
+      <li class="nav-item">
+      <a class="nav-link" href=" ">About</a>
+      </li>
+           
+       <li class="nav-item">
+      <a class="nav-link" href=" ">Contact Us</a>
+      </li> 
+      
       <li class="nav-item">
         <a class="nav-link" id="settings-bar" href=" {% url 'profile' %}">Settings</a>
       </li>
+                                                     
+           <li class="nav-item">
+        <a class="nav-link" id="settings-bar" href=" {% url 'logout' %}">Logout</a>
+      </li>                                                                
+                                                     
+      
       {% endif %}
     </ul>
   </div>
