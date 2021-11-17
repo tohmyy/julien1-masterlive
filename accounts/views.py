@@ -191,7 +191,7 @@ def placeNewOrder(request, pk):
     return render(request, 'templates/accounts/order_form.html', context)
 '''
 
-'''
+
 @login_required(login_url='login')#redirect to login page
 @allowed_users(allowed_roles=['admin', 'customer'])
 def placeNewOrder(request, pk):
@@ -212,7 +212,7 @@ def placeNewOrder(request, pk):
 
     context = {'customer':customer, 'formset':formset}
     return render(request, 'templates/accounts/order_form.html', context)
-'''
+
 
 
 
