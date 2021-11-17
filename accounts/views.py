@@ -204,7 +204,7 @@ def placeNewOrder(request, pk):
 
     if request.method == 'POST':
         #form = OrderForm(request.POST)
-        formsetss = OrderFormSet(request.POST, instance=customer)
+        formset = OrderFormSet(request.POST, instance=customer)
 
         if formset.is_valid():
             formset.save()
