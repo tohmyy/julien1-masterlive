@@ -7,12 +7,27 @@
         <div class = "card card-body">
 
             <form action="" method="POST">
+                
+                {% if request.user.is_staff %}
+                
+                {% csrf_token %}
+                {{formsetss.management_form}}
+                {%for form in formsetss%}
+                    {{form}}
+                <hr>
+                {%endfor%}
+                
+                {% else %}
+                
                 {% csrf_token %}
                 {{formset.management_form}}
                 {%for form in formset%}
                     {{form}}
                 <hr>
                 {%endfor%}
+                
+                {% endif %}
+                
                 <input class="btn btn-sm btn-info" type = "submit" name="Submit">
             </form>
 
