@@ -216,6 +216,29 @@ def placeNewOrder(request, pk):
 
 
 
+@login_required(login_url='login')#redirect to login page
+@allowed_users(allowed_roles=['admin', 'customer'])
+def userPlaceOrder(request):
+    OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=4)
+    
+    customer = Customer.objects.get(id=request.user.customer.id)
+
+    formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
+    
+
+    if request.method == 'POST':
+        formset = OrderFormSet(request.POST, instance=customer)
+
+        if formset.is_valid():
+            formset.save()
+            return redirect("/")
+
+    context = {'customer':customer, 'formset':formset}
+    return render(request, 'templates/accounts/order_form.html', context)
+
+
+
+
 #pass primary key "pk" when you want to perform action on a specific item
 @login_required(login_url='login')#redirect to login page
 @allowed_users(allowed_roles=['admin'])

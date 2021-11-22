@@ -19,6 +19,7 @@ urlpatterns = [
 
     path('create_order/', views.createOrder, name='create_order'),
     path('place_new_order<str:pk>/', views.placeNewOrder, name='place_new_order'),
+    path('user_place_order/', views.userPlaceOrder, name='user_place_order'),
     path('update_order/<str:pk>/', views.updateOrder, name='update_order'),
     path('delete_order/<str:pk>/', views.deleteOrder, name='delete_order'),
     path('order_summary/', views.orderSummary, name='order_summary'),
