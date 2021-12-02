@@ -6,8 +6,9 @@
 <br>
 <div class="row">
     <div class="col-md">
+        <a class = "btn btn-outline-dark" href = "{% url 'user' %}"> &#x2190;Go Back</a>
         <div class="card card-body">
-            <h5>Order Summary</h5>
+            <h5 style="float:right; margin:5px">Order Summary</h5>
         </div>
         <div class="card card-body">
             <table class="table">
@@ -35,11 +36,11 @@
                 </tr>
 
             </table>
+            <button onClick="window.print()" style="float:right; margin:5px">Print this page
+</button>
             </div>
         </div>
         </div>
-        <div><button onClick="window.print()" style="float:right; margin:5px">Print this page
-</button></div>
 
 
 
