@@ -8,12 +8,13 @@
     }
     #customer-name{
     font-size:20px;
-    margin-left:900px;
+    float:right; 
+    margin:5px;
     }
 </style>
 
 <span id="user-profile">User Profile</span>
-<span id='customer-name'>{{currentUser}}</span>
+<span id='customer-name'>Welcome: {{currentUser}}</span>
 {%include 'templates/accounts/status.html'%}
 
 
@@ -24,13 +25,12 @@
     <h5>LAST 5 ORDERS</h5>
     <hr>
     <div class="card card-body">
-        <a class="btn btn-primary  btn-sm btn-block" href="{% url 'place_new_order' user.id %}">Place Order</a>
+        <a class="btn btn-primary  btn-sm btn-block" href="{% url 'user_place_order' %}">Place Order</a>
         <table class="table table-sm">
             <tr>
                 <th>Product</th>
                 <th>Date Orderd</th>
                 <th>Status</th>
-                <th>Update</th>
                 <th>Remove</th>
             </tr>
             {% for i in orders %}
@@ -38,12 +38,11 @@
                 <td>{{i.product.name}}</td>
                 <td>{{i.date_created}}</td>
                 <td>{{i.status}}</td>
-                <td> <a class="btn btn-sm btn-info" href="{% url 'update_order' i.id %}">Update</a> </td>
                 <td> <a class="btn btn-sm btn-danger" href="{%url 'delete_order' i.id %}">Delete</a> </td>
             </tr>
             
             {% endfor %}
-            <a class="btn btn-sm btn-warning" href="{% url 'order_summary' %}">Order Summary</a>
+            <a class="btn btn-sm btn-warning btn-block" href="{% url 'order_summary' %}">Order Summary</a>
         </table>
     </div>
 </div>

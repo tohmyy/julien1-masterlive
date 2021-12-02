@@ -166,6 +166,7 @@ def createOrder(request):
     return render(request, 'templates/accounts/order_form.html', context)
 
 
+'''
 @login_required(login_url='login')#redirect to login page
 @allowed_users(allowed_roles=['admin', 'customer'])
 def placeNewOrder(request, pk):
@@ -188,7 +189,78 @@ def placeNewOrder(request, pk):
 
     context = {'formset':formset, 'customer':customer, 'user':user, 'formsetss':formsetss}
     return render(request, 'templates/accounts/order_form.html', context)
+'''
 
+
+@login_required(login_url='login')#redirect to login page
+@allowed_users(allowed_roles=['admin', 'customer'])
+def placeNewOrder(request, pk):
+    OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=4)
+    
+    customer = Customer.objects.get(id=pk)
+
+    formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
+    #form = OrderForm(initial={'customer':customer})
+
+    if request.method == 'POST':
+        #form = OrderForm(request.POST)
+        formset = OrderFormSet(request.POST, instance=customer)
+
+        if formset.is_valid():
+            formset.save()
+            return redirect("/")
+
+    context = {'customer':customer, 'formset':formset}
+    return render(request, 'templates/accounts/order_form.html', context)
+
+
+
+
+@login_required(login_url='login')#redirect to login page
+@allowed_users(allowed_roles=['admin', 'customer'])
+def userPlaceOrder(request):
+    OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=4)
+    
+    customer = Customer.objects.get(id=request.user.customer.id)
+
+    formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
+    
+
+    if request.method == 'POST':
+        formset = OrderFormSet(request.POST, instance=customer)
+
+        if formset.is_valid():
+            formset.save()
+            return redirect("/")
+
+    context = {'customer':customer, 'formset':formset}
+    return render(request, 'templates/accounts/order_form.html', context)
+
+
+
+
+#pass primary key "pk" when you want to perform action on a specific item
+@login_required(login_url='login')#redirect to login page
+@allowed_users(allowed_roles=['admin'])
+def updateOrder(request, pk):
+    order = Order.objects.get(id=pk)
+    formset = OrderForm(instance=order)
+
+    #(instance = order)-> sets the form with the info
+    # of the order that you want to update
+    #it also updates the current instance (order) instead of
+    # creating a new order after submitting
+
+    if request.method == 'POST':
+        formset = OrderForm(request.POST, instance=order)
+        if formset.is_valid():
+            formset.save()
+            return redirect("/")
+
+    context = {'formset': formset}
+    return render(request, 'templates/accounts/order_form.html', context)
+
+'''
 #pass primary key "pk" when you want to perform action on a specific item
 @login_required(login_url='login')#redirect to login page
 @allowed_users(allowed_roles=['admin'])
@@ -209,6 +281,7 @@ def updateOrder(request, pk):
 
     context = {'form': form}
     return render(request, 'templates/accounts/order_form.html', context)
+'''
 
 @login_required(login_url='login')#redirect to login page
 @allowed_users(allowed_roles=['admin'])
