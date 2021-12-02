@@ -241,7 +241,29 @@ def userPlaceOrder(request):
 
 #pass primary key "pk" when you want to perform action on a specific item
 @login_required(login_url='login')#redirect to login page
-@allowed_users(allowed_roles=['admin', 'customer'])
+@allowed_users(allowed_roles=['admin'])
+def updateOrder(request, pk):
+    order = Order.objects.get(id=pk)
+    formset = OrderForm(instance=order)
+
+    #(instance = order)-> sets the form with the info
+    # of the order that you want to update
+    #it also updates the current instance (order) instead of
+    # creating a new order after submitting
+
+    if request.method == 'POST':
+        formset = OrderForm(request.POST, instance=order)
+        if formset.is_valid():
+            formset.save()
+            return redirect("/")
+
+    context = {'formset': formset}
+    return render(request, 'templates/accounts/order_form.html', context)
+
+'''
+#pass primary key "pk" when you want to perform action on a specific item
+@login_required(login_url='login')#redirect to login page
+@allowed_users(allowed_roles=['admin'])
 def updateOrder(request, pk):
     order = Order.objects.get(id=pk)
     form = OrderForm(instance=order)
@@ -259,6 +281,7 @@ def updateOrder(request, pk):
 
     context = {'form': form}
     return render(request, 'templates/accounts/order_form.html', context)
+'''
 
 @login_required(login_url='login')#redirect to login page
 @allowed_users(allowed_roles=['admin'])
